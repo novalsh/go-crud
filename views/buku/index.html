@@ -19,7 +19,7 @@
     <div class="container mt-5">
       <h3>Book List</h3>
       <a href="/buku/add" class="btn btn-sm btn-primary">Tambah Buku</a>
-        <hr />
+      <hr />
 
       <table class="table table-sriped table-hover">
         <thead>
@@ -32,6 +32,26 @@
             <th>Harga</th>
           </tr>
         </thead>
+        <tbody>
+          {{range .buku}}
+          <tr>
+            <td>{{ .Id }}</td>
+            <td>{{ .Judul }}</td>
+            <td>{{ .Jenis }}</td>
+            <td>{{ .Pengarang}}</td>
+            <td>{{ .Tahun}}</td>
+            <td>{{ .Harga}}</td>
+            <td>
+              <a href="/buku/edit/{{ .Id }}" class="btn btn-sm btn-warning"
+                >Edit</a
+              >
+              <a href="/buku/delete/{{ .Id }}" class="btn btn-sm btn-danger"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
       </table>
     </div>
   </body>

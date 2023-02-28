@@ -11,11 +11,18 @@ import (
 var bukuModel = models.NewBukuModel()
 
 func Index(response http.ResponseWriter, request *http.Request) {
+
+	buku, _ := bukuModel.FindAll()
+
+	data := map[string]interface{}{
+		"buku": buku,
+	}
+
 	temp, err := template.ParseFiles("views/buku/index.html")
 	if err != nil {
 		panic(err)
 	}
-	temp.Execute(response, nil)
+	temp.Execute(response, data)
 
 }
 

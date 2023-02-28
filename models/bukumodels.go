@@ -22,6 +22,25 @@ func NewBukuModel() *BukuModel {
 	}
 }
 
+func (p *BukuModel) FindAll() ([]entities.Buku, error) {
+	rows, err := p.conn.Query("SELECT * FROM buku")
+	if err != nil {
+		return []entities.Buku{}, err
+	}
+
+	defer rows.Close()
+
+	var bukus []entities.Buku
+
+	for rows.Next() {
+		var buku entities.Buku
+		rows.Scan(&buku.Id, &buku.Judul, &buku.Jenis, &buku.Pengarang, &buku.Tahun, &buku.Harga)
+		bukus = append(bukus, buku)
+	}
+
+	return bukus, nil	
+}
+
 func (p *BukuModel) Create(buku entities.Buku) bool {
 
 	result, err := p.conn.Exec("INSERT INTO buku (nama_buku, jenis_buku, pengarang, tahun_terbit, harga_buku) VALUES (?, ?, ?, ?, ?)", buku.Judul, buku.Jenis, buku.Pengarang, buku.Tahun, buku.Harga)
