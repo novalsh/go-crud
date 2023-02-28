@@ -6,5 +6,5 @@ type Buku struct {
 	Jenis     string `json:"pengarang"`
 	Pengarang string `json:"penerbit"`
 	Tahun     string `json:"tahun"`
-	harga     string `json:"harga"`
+	Harga     string `json:"harga"`
 }
