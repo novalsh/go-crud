@@ -53,3 +53,20 @@ func (p *BukuModel) Create(buku entities.Buku) bool {
 
 	return lastInsertId > 0
 }
+
+func (p *BukuModel) Update(buku entities.Buku) error {
+	_, err := p.conn.Exec("UPDATE buku SET judul = ?, jenis = ?, pengarang = ?, tahun = ?, harga = ? WHERE Id = ?", buku.Judul, buku.Jenis, buku.Pengarang, buku.Tahun, buku.Harga, buku.Id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (p *BukuModel) Delete(id int64) error {
+	_, err := p.conn.Exec("DELETE FROM buku WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
