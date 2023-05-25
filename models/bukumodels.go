@@ -43,7 +43,7 @@ func (p *BukuModel) FindAll() ([]entities.Buku, error) {
 
 func (p *BukuModel) Create(buku entities.Buku) bool {
 
-	result, err := p.conn.Exec("INSERT INTO buku (nama_buku, jenis_buku, pengarang, tahun_terbit, harga_buku) VALUES (?, ?, ?, ?, ?)", buku.Judul, buku.Jenis, buku.Pengarang, buku.Tahun, buku.Harga)
+	result, err := p.conn.Exec("INSERT INTO buku (judul, jenis, pengarang, tahun, harga) VALUES (?, ?, ?, ?, ?)", buku.Judul, buku.Jenis, buku.Pengarang, buku.Tahun, buku.Harga)
 	if err != nil {
 		fmt.Println(err)
 		return false
