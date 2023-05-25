@@ -38,7 +38,7 @@ func (p *BukuModel) FindAll() ([]entities.Buku, error) {
 		bukus = append(bukus, buku)
 	}
 
-	return bukus, nil	
+	return bukus, nil
 }
 
 func (p *BukuModel) Create(buku entities.Buku) bool {

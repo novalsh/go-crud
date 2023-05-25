@@ -2,16 +2,21 @@ package config
 
 import (
 	"database/sql"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func DBConnection() (*sql.DB, error) {
-	dbDriver := "mysql"
-	dbUser := "root"
-	dbPass := ""
-	dbName := "go_crud"
+var DB *sql.DB
 
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
-	return db, err
+func DBConnection() (*sql.DB, error) {
+	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3308)/go_crud")
+	if err != nil {
+		return nil, err
+	}
+	if err := db.Ping(); err != nil {
+		return nil, err
+	}
+	fmt.Println("Database connected successfully")
+	return db, nil
 }
